@@ -24,14 +24,14 @@ class Users(Base):
     hashed_password=Column(String)
     phone_number=Column(String, nullable=True)
     is_active=Column(Boolean, default=True)
-    address_id=Column(String, ForeignKey("address.id"), nullable=True)
+    address_id=Column(Integer, ForeignKey("address.id"), nullable=True)
 
     todos=relationship("Todos",back_populates="owner")
     address=relationship("Address", back_populates="user_address")
 
 class Address(Base):
     __tablename__ = "address"
-    id = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     address1 = Column(String, nullable=False)
     address2 = Column(String, nullable=False)
     city = Column(String, nullable=False)

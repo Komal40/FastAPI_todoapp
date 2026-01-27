@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from database import SessionLocal,engine
+from database import SessionLocal,engine, get_db
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
@@ -42,12 +42,7 @@ router=APIRouter(
     responses={401:{"user":"Not authenticate"}}
 )
 
-def get_db():
-    try:
-        db=SessionLocal()
-        yield db
-    finally:
-        db.close()
+
 
 bcrypt_context=CryptContext(schemes=["bcrypt"],deprecated="auto")
 

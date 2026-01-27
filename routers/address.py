@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import models
-from database import engine, SessionLocal
+from database import engine, SessionLocal, get_db
 from typing import Optional
 from pydantic import BaseModel, Field
 
@@ -14,12 +14,6 @@ router=APIRouter(
 
 models.Base.metadata.create_all(bind=engine)
 
-def get_db():
-    try:
-        db=SessionLocal()
-        yield db
-    finally:
-        db.close()
 
 class Address(BaseModel):
     address1:str

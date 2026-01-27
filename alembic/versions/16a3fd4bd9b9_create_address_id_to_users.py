@@ -20,7 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     """Upgrade schema."""
-    op.add_column('users', sa.Column('address_id', sa.String(), nullable=True))
+    op.add_column('users', sa.Column('address_id', sa.Integer(), nullable=True))
     op.create_foreign_key('address_user_fk', source_table='users', referent_table='address',
                           local_cols=['address_id'], remote_cols=['id'], ondelete='CASCADE')
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 import models
-from database import engine, SessionLocal
+from database import engine, SessionLocal, get_db
 from sqlalchemy.orm import Session
 from typing import Optional
 from pydantic import BaseModel, Field
@@ -19,13 +19,6 @@ class UserVerification(BaseModel):
     password:str
     new_password:str
 
-
-def get_db():
-    try:
-        db=SessionLocal()
-        yield db
-    finally:
-        db.close()
 
 
 @router.get("/")
