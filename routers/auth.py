@@ -97,10 +97,11 @@ async def create_user(user:CreateUser, db:Session=Depends(get_db)):
 
     db.add(new_user)
     db.commit()
-
+    db.refresh(new_user)
     return {
         'status_code':201,
-        'data':db.query(models.Users).all()
+        # 'data':db.query(models.Users).all()
+        'data':new_user
     }
 
 
